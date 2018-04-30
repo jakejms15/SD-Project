@@ -1,0 +1,30 @@
+body
+{
+    background-image:url(Images/wood2.jpg);
+    background-position:center;
+    width: 100%;
+    height:500px;
+}
+
+.containter
+{
+    width: 1000px;
+    height: 50%;
+}
+.centered-form
+{
+	margin-top: 50%;
+    margin-left: 1000px;
+}
+.centered-form .panel
+{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(0, 0, 0, 0.3) 2px 20px 20px;
+    
+}
+
+#pBody #food
+{
+    width: 900px;
+    float: left;
+}

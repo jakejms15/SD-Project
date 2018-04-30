@@ -1,0 +1,57 @@
+body
+{
+    background-color: #525252;
+}
+#cont
+{
+    background-image:url(Images/pizza.jpg);
+    background-position:center;
+    width: 100%;
+    height:1900px;
+}
+.centered-form
+{
+	margin-top: 60px;
+}
+
+.centered-form .panel
+{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(0, 0, 0, 0.3) 2px 20px 20px;
+    
+}
+
+.container #pBody #food
+{
+    width: 900px;
+    float: left;
+    margin-left: 50px;
+}
+
+.container h1
+{
+    color: white;
+    font-family: fantasy;
+}
+
+#pBody h3
+{
+    color: white;
+    font-family: fantasy;
+}
+
+#pBody h4
+{
+    color: white;
+    font-family: fantasy;
+}
+#pBody h6
+{
+    color: white;
+    font-family: fantasy;
+}
+
+#pBody #sLast
+{
+    border-bottom: 5px solid white;
+}
