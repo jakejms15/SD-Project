@@ -55,21 +55,20 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="userId" id="userId" class="form-control" placeholder="Enter User ID" required>
+                                            <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="submit" name="Submit" value="Check" class="btn btn-info btn-block">
+                                        <input type="submit" name="Submit" value="Send Password" class="btn btn-info btn-block">
                                     </div>
                                 </div>
                                  <?php        
         
                                 if(isset($_POST['Submit']))
                                 {
-                                    $userId = $_POST['userId'];
-
+                                    $email = $_POST['email'];
                                     $conn = mysqli_connect("localhost", "root", "", "booking_db", "3306");
                                     if (mysqli_connect_errno())
                                     {
@@ -77,13 +76,14 @@
                                         later";
                                         exit;
                                     } 
-                                    $query = "SELECT Password FROM tbl_client WHERE UserId = $userId";
+                                    $query = "SELECT Password FROM tbl_client WHERE Email = '$email'";
 
                                     $result = mysqli_query($conn, $query)
                                         or die("Error in query: ". mysqli_error($conn));
 
-                                    while ($row = mysqli_fetch_assoc($result)){
-                                        echo "Your Password is $row[Password]<br/>";
+                                    while ($row = mysqli_fetch_assoc($result)){                                       
+                                        $message = "Hi! your password is $row[Password]";
+                                        mail($email, "Password Recovery", $message);
                                     }
 
 

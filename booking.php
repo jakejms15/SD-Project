@@ -165,6 +165,7 @@
             $tableNum = $_POST['tableNum'];
             $userId = $_POST['userId'];
             
+            
                 $conn = mysqli_connect("localhost", "root", "", "booking_db", "3306");
                 if (mysqli_connect_errno())
                 {
@@ -172,12 +173,21 @@
                     later";
                     exit;
                 } 
+            
+            if($month != "select" || $day != "select" || $year != "select")
+            {
                 $query = "INSERT INTO tbl_booking (Day, Month, Year, TableNumber, UserId)
                             VALUES ('$day', '$month', '$year', '$tableNum', '$userId')";
 
                 $result = mysqli_query($conn, $query)
                     or die("Error in query: ". mysqli_error($conn));
-             echo "<script type='text/javascript'>alert('Table Booked');</script>";
+                echo "<script type='text/javascript'>alert('Table Booked');</script>";
+            }
+            else
+            {
+                
+                echo "<script type='text/javascript'>alert('Choose a correct date');</script>";
+            }
             
             
         }

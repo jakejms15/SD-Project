@@ -54,7 +54,7 @@
                             <h1 class="panel-title">Contact Us</h1>
                         </div>
                         <div class="panel-body">
-                            <form action="login.php" method="post">
+                            <form action="contact.php" method="post">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -62,6 +62,24 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <h3>Send Us A Message!</h3>
+                                        <div class="row">
+                                            <div class="col-md-12"><br/>
+                                                <input type="text" class="form-control" name="userId" id="userId" placeholder="User Id" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-12"><br/>
+                                                <textarea type="text" class="form-control" name="message" placeholder="Enter Your Message" rows="10"required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12"><br/>
+                                                <input type="submit" name="Submit" value="Send Message" class="btn btn-info btn-block">
+                                            </div>
+                                        </div><br/>
+                                        
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h5 style="font-weight:bold; text-decoration: underline;">Phone Numbers:</h5>
@@ -78,6 +96,8 @@
                                                 <h5>Malta</h5>
                                             </div>
                                         </div>
+                                        
+                                        
                                     </div>
                                 </div>
                             </form>
@@ -86,45 +106,17 @@
                 </div>
             </div>
         </div>
+        <?php        
+            if(isset($_POST['Submit']))
+            {
+                $userId = $_POST['userId'];
+                $message = $_POST['message'];     
+                mail("software.project.testing@gmail.com", "Message Us", $message, $userId);
 
-    <?php
-            if((isset($_POST['submit']))){
-                
-                if((!isset($_POST['email'])) || (!isset($_POST['password']))){
-                    echo "Both values must be set";
-                } else {
-                    $email = $_POST['email'];
-                    $password = $_POST['password'];
-                    
-                    $connection = mysqli_connect("localhost", "root", "", "booking_db", "3306");
-                    if(mysqli_connect_errno()){
-                        echo "Error: Could not connect to database. Please try again later";
-                        exit;
-                    }
-                    
-                    $query = "select count(*) from tbl_client
-                              where Email = '$email' and Password = '$password' ";
-                    
-                    $result = mysqli_query($connection, $query)
-                        or die("Error in query: ". mysqli_error($connection));
-                    
-                    $row = mysqli_fetch_row($result);
-                    $count = $row[0];
-                    $message = "Incorrect Email or Password";
-                    
-                    if($count > 0) 
-                    {
-                        session_start();
-                        header('Location: homeLogged.php');
-                        
-                    } 
-                    else 
-                    {
-                        echo "<script type='text/javascript'>alert('$message');</script>";
-                    }
-                }
+
             }
         ?>
+   
          <!-- javascript files -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>

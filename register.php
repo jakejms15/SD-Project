@@ -119,7 +119,9 @@
                                         $result = mysqli_query($conn, $query)
                                             or die("User ID already used! Please user a different ID.");
 
-
+                                        $header = "Registration Successful!";
+                                        $message = "Welcome to the team $fName";
+                                        mail($email, "Registration Successful", $message, $header);
                                     }
                                 ?>
                             </form>
