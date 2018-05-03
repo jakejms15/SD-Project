@@ -16,14 +16,13 @@
         <script src="https://use.fontawesome.com/4f7c6bbdcb.js"></script>
     </head> 
     
-    <body>
+    <body>       
+        <?php if (isset($_SESSION['UserId'])) { ?>
         
         <nav class=" navbar navbar-expand-lg navbar-dark bg-dark p-3 mb-3">
-            <div class="container">            
-                
-
+            <div class="container">                            
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto">                        
                         <li class="nav-item active">
                             <a class="nav-link" href="homeLogged.php">About Us</a>
                         </li>
@@ -49,6 +48,36 @@
                 </div>
             </div>
         </nav>
+        <?php
+}
+        else
+                  {?>
+                      <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 mb-3">
+            <div class="container">            
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="home.php">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="register.php">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.php">Sign In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.php">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="menu.php">Menu</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+                      
+                 <?php }?>
         
         <div class="jumbotron m-4">
                 <h1 class="display-3">Cupping's Restaurant</h1>

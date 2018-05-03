@@ -174,21 +174,38 @@
                     exit;
                 } 
             
-            if($month != "select" || $day != "select" || $year != "select")
-            {
-                $query = "INSERT INTO tbl_booking (Day, Month, Year, TableNumber, UserId)
-                            VALUES ('$day', '$month', '$year', '$tableNum', '$userId')";
-
-                $result = mysqli_query($conn, $query)
+                $query2 = "SELECT count(*) FROM tbl_booking
+                                WHERE Day = '$day' AND Month = '$month' AND Year = '$year' AND TableNumber = '$tableNum'";
+            
+                    
+                $result2 = mysqli_query($conn, $query2)
                     or die("Error in query: ". mysqli_error($conn));
-                echo "<script type='text/javascript'>alert('Table Booked');</script>";
-            }
+
+                $row = mysqli_fetch_row($result2);
+                $count = $row[0];
+
+                if($count > 0) 
+                {
+                    echo "<script type='text/javascript'>alert('Table already booked. Please choose a different table of a different date!');</script>";
+
+                } 
             else
             {
-                
-                echo "<script type='text/javascript'>alert('Choose a correct date');</script>";
+                if($month != "select" || $day != "select" || $year != "select")
+                {
+                    $query = "INSERT INTO tbl_booking (Day, Month, Year, TableNumber, UserId)
+                                VALUES ('$day', '$month', '$year', '$tableNum', '$userId')";
+
+                    $result = mysqli_query($conn, $query)
+                        or die("Error in query: ". mysqli_error($conn));
+                    echo "<script type='text/javascript'>alert('Table Booked');</script>";
+                }
+                else
+                {
+
+                    echo "<script type='text/javascript'>alert('Choose a correct date');</script>";
+                }
             }
-            
             
         }
     ?>

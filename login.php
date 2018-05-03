@@ -97,12 +97,18 @@
                         exit;
                     }
                     
-                    $query = "select count(*) from tbl_client
-                              where Email = '$email' and Password = '$password' ";
+                    $query = "SELECT count(*) FROM tbl_client
+                              where Email = '$email' AND Password = '$password' ";
+                    
+                    $query2 = "SELECT UserId FROM tbl_client 
+                                WHERE Email = '$email' AND Password = '$password'";
                     
                     $result = mysqli_query($connection, $query)
                         or die("Error in query: ". mysqli_error($connection));
                     
+                    $result2 = mysqli_query($connection, $query2)
+                        or die("Error in query: ". mysqli_error($connection));
+
                     $row = mysqli_fetch_row($result);
                     $count = $row[0];
                     $message = "Incorrect Email or Password";
@@ -110,6 +116,8 @@
                     if($count > 0) 
                     {
                         session_start();
+                        $row2 = mysqli_fetch_row($result2);
+                        $_SESSION["UserId"] = $row2[0];
                         header('Location: homeLogged.php');
                         
                     } 

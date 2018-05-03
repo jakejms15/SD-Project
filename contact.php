@@ -48,7 +48,7 @@
             <div class="row centered-form">
                 <div class="col-md-1"></div>
                 <div class="col-md-1"></div>
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="panel panel-default ml-3 p-3">
                         <div class="panel-heading">
                             <h1 class="panel-title">Contact Us</h1>

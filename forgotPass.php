@@ -32,7 +32,7 @@
                             <a class="nav-link" href="login.php">Sign In</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contactLogged.php">Contact Us</a>
+                            <a class="nav-link" href="contact.php">Contact Us</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="menu.php">Menu</a>

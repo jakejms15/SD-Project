@@ -114,14 +114,42 @@
                                             later";
                                             exit;
                                         } 
-                                        $query = "INSERT INTO tbl_client (UserId, FirstName, LastName, MobileNumber, Email, Password, Subscribed)
-                                                    VALUES ('$userId', '$fName', '$lName', '$mobile', '$email', '$password', '$sub')";
-                                        $result = mysqli_query($conn, $query)
-                                            or die("User ID already used! Please user a different ID.");
+                                       
+                                        
+                                        $query2 = "SELECT count(*) FROM tbl_client
+                                                    where Email = '$email'";
 
-                                        $header = "Registration Successful!";
-                                        $message = "Welcome to the team $fName";
-                                        mail($email, "Registration Successful", $message, $header);
+                                        $result2 = mysqli_query($conn, $query2)
+                                            or die("Error in query: ". mysqli_error($conn));
+
+                                        $row = mysqli_fetch_row($result2);
+                                        $count = $row[0];  
+                                        
+                                        $query3 = "SELECT count(*) FROM tbl_client
+                                                    where UserId = '$userId'";
+
+                                        $result3 = mysqli_query($conn, $query3)
+                                            or die("Error in query: ". mysqli_error($conn));
+
+                                        $row2 = mysqli_fetch_row($result3);
+                                        $count2 = $row2[0];        
+                                    
+                                        
+                                        if($count > 0) 
+                                        {
+                                            echo "<script type='text/javascript'>alert('Email already in use!');</script>";
+                                        }
+                                        else if($count2 > 0)
+                                        {
+                                            echo "<script type='text/javascript'>alert('User ID already in use!');</script>";
+                                        }
+                                        else
+                                        {
+                                             $query = "INSERT INTO tbl_client (UserId, FirstName, LastName, MobileNumber, Email, Password, Subscribed)
+                                                    VALUES ('$userId', '$fName', '$lName', '$mobile', '$email', '$password', '$sub')";
+                                             $result = mysqli_query($conn, $query)
+                                            or die("User ID already used! Please user a different ID.");
+                                        }
                                     }
                                 ?>
                             </form>
