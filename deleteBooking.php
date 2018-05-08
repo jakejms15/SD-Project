@@ -84,7 +84,7 @@
                                         later";
                                         exit;
                                     } 
-                                    $query = "DELETE FROM tbl_booking WHERE UserId = $userId";
+                                    $query = "DELETE FROM tbl_booking WHERE UserId = '$userId'";
 
                                     $result = mysqli_query($conn, $query)
                                         or die("Error in query: ". mysqli_error($conn));

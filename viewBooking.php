@@ -85,7 +85,7 @@
                                         later ";
                                         exit;
                                     } 
-                                    $query = "SELECT * FROM tbl_booking WHERE UserId = $userId";
+                                    $query = "SELECT * FROM tbl_booking WHERE UserId = '$userId'";
 
                                     $result = mysqli_query($conn, $query)
                                         or die("Error in query: ". mysqli_error($conn));

@@ -186,7 +186,7 @@
 
                 if($count > 0) 
                 {
-                    echo "<script type='text/javascript'>alert('Table already booked. Please choose a different table of a different date!');</script>";
+                    echo "<script type='text/javascript'>alert('Table already booked. Please choose a dri');</script>";
 
                 } 
             else
