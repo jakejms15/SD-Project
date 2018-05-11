@@ -35,14 +35,17 @@ public class viewClients extends javax.swing.JFrame {
             
             //make a query
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT UserId FROM tbl_client");
+            ResultSet rs = stmt.executeQuery("SELECT UserId, FirstName, LastName FROM tbl_client");
             
             DefaultTableModel model = (DefaultTableModel) tblUserId.getModel();
             model.setRowCount(0); //empty the table
             //output result
             while (rs.next())
             {
-                model.addRow(new Object[]{rs.getInt(1)});
+                model.addRow(new Object[]{rs.getString(1),
+                                          rs.getString(2),
+                                          rs.getString(3)
+                });
             }
             
             //close connection
@@ -82,20 +85,20 @@ public class viewClients extends javax.swing.JFrame {
 
         tblUserId.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "User Id"
+                "User Id", "First Name", "Last Name"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

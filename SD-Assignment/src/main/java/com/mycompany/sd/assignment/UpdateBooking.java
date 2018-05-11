@@ -35,7 +35,7 @@ public class UpdateBooking extends javax.swing.JFrame {
             
             //make a query
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM tbl_booking WHERE tbl_booking.UserId LIKE "+txtUserId.getText());
+            ResultSet rs = stmt.executeQuery("SELECT * FROM tbl_booking WHERE UserId = '"+txtUserId.getText()+"'");
             
             DefaultTableModel model = (DefaultTableModel) tblBooking.getModel();
             model.setRowCount(0); //empty the table
