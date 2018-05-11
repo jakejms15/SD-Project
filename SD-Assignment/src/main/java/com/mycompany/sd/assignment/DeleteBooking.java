@@ -35,7 +35,7 @@ public class DeleteBooking extends javax.swing.JFrame {
             
             //make a query
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM tbl_booking WHERE UserId = '"+txtUserId.getText()+"'");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM tbl_booking WHERE UserId = '"+txtUserId.getText()+"' OR BookingId = '"+txtBookingId.getText()+"'");
             
             DefaultTableModel model = (DefaultTableModel) tblBooking.getModel();
             model.setRowCount(0); //empty the table
@@ -93,11 +93,43 @@ public class DeleteBooking extends javax.swing.JFrame {
             
             //make a query
             Statement stmt = con.createStatement();
-            
-            stmt.executeUpdate("DELETE FROM tbl_booking WHERE tbl_booking.UserId = "+txtUserId.getText());
+            if(txtUserId.getText().equals("") || txtBookingId.getText().equals(""))
+            {
+                lblCheck.setText("Both fields must be filled!");
+            }
+            else
+            {
+            stmt.executeUpdate("DELETE FROM tbl_booking WHERE UserId = '"+txtUserId.getText()+"' AND BookingId = '"+txtBookingId.getText()+"'");
+            lblCheck.setText("Booking Deleted!");
             connectAndRetrieve();
-            //close connection
             con.close();            
+            }
+            //close connection
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    
+    public void connectAndDeleteOneAll()
+    {
+        
+        try
+        {
+            //connect
+            Connection con = DriverManager.getConnection
+               ("jdbc:mysql://localhost:3306/booking_db", "root", "");
+            
+            //make a query
+            Statement stmt = con.createStatement();
+            
+            stmt.executeUpdate("DELETE FROM tbl_booking WHERE UserId = '"+txtUserId.getText()+"'");
+            lblCheck.setText("Bookings Deleted!");
+            connectAndRetrieve();
+            con.close();            
+            
+            //close connection
         }
         catch (Exception e)
         {
@@ -158,6 +190,10 @@ public class DeleteBooking extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtBookingId = new javax.swing.JTextField();
+        lblCheck = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -208,7 +244,7 @@ public class DeleteBooking extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Delete All");
+        jButton2.setText("Delete All Bookings");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -222,53 +258,81 @@ public class DeleteBooking extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Enter Booking ID:");
+
+        txtBookingId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBookingIdActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Delete All Bookings With Inputted ID");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtUserId, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(75, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(116, 116, 116))
+                                .addGap(89, 89, 89)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(15, 15, 15)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtUserId)
+                                    .addComponent(txtBookingId, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(lblCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUserId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(btnSearch)
                     .addComponent(jButton1))
                 .addGap(4, 4, 4)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtBookingId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3)
+                    .addComponent(lblCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -290,6 +354,14 @@ public class DeleteBooking extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txtBookingIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBookingIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBookingIdActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        connectAndDeleteOneAll();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,10 +403,14 @@ public class DeleteBooking extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCheck;
     private javax.swing.JTable tblBooking;
+    private javax.swing.JTextField txtBookingId;
     private javax.swing.JTextField txtUserId;
     // End of variables declaration//GEN-END:variables
 }

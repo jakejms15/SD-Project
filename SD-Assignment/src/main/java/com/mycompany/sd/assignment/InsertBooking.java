@@ -64,6 +64,7 @@ public class InsertBooking extends javax.swing.JFrame {
             }
             else 
             {
+                lblCheck.setText("Booking Inserted!");
                 connectAndInsert(); 
             }
             }
