@@ -18,40 +18,16 @@
     
     <body>
         
-       <?php if (isset($_SESSION['UserId'])) { ?>
-        
-        <nav class=" navbar navbar-expand-lg navbar-dark bg-dark p-3 mb-3">
-            <div class="container">                     
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="homeLogged.php">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="signOut.php">Sign Out</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contactLogged.php">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="menuLogged.php">Menu</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="booking.php">Make A Booking</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="viewBooking.php">View Your Booking</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="deleteBooking.php">Delete Your Booking</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <?php 
+            if (isset($_SESSION['UserId'])) 
+            { 
+                include 'navbarLogged.php';
+            }
+            else
+            {
+                header('Location: home.php');
+            }
+        ?>
           <div class="container">
             <div class="row centered-form">
                 <div class="col-md-3"></div>
@@ -111,39 +87,7 @@
                 </div>
             </div>
         </div>
-        <?php
-        }
-        else
-                  {?>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 mb-3">
-            <div class="container">            
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="home.php">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="register.php">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.php">Sign In</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.php">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="menu.php">Menu</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <?php include 'ifSession.php'; ?>
-                      
-                 <?php }?>
-
-      
+       
    
          <!-- javascript files -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
